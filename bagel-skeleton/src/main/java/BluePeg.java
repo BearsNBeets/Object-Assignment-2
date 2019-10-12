@@ -6,11 +6,11 @@ import bagel.util.Vector2;
 
 public class BluePeg extends Peg{
 
-    private Image image;
 
 
-    public BluePeg(Point point) {
-        super(point, "res/peg.png");
+    public BluePeg(Point point, String shape) {
+        super(point, imagesFolder + "blue" + shape + srcEnd, shape);
     }
+
 
 }

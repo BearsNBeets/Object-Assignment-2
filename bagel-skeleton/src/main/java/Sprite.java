@@ -11,6 +11,7 @@ import bagel.util.Rectangle;
 import bagel.util.Vector2;
 
 public abstract class Sprite {
+    public static final String imagesFolder = "res/";
     private Image image;
     private Rectangle rect;
     private Point point;

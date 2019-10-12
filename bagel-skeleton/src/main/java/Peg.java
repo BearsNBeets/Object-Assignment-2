@@ -10,13 +10,20 @@ import bagel.util.Rectangle;
 import bagel.util.Side;
 import bagel.util.Vector2;
 
-public class Peg extends Sprite {
+import java.util.ArrayList;
 
-    public Peg(Point point, String imageSrc) {
+public class Peg extends Sprite {
+    public static final String srcEnd = "peg.png";
+
+    private String shape;
+
+    public Peg(Point point, String imageSrc, String shape) {
         super(point, imageSrc);
+        this.shape = shape;
     }
 
-    public Peg onCollision(Ball ball) {
+    public Peg onCollision(ArrayList<Ball> balls, int ballNumber) {
+        Ball ball = balls.get(ballNumber);
         calculateNewVelocity(ball);
         //Delete peg from list of pegs on board
         return null;
@@ -45,5 +52,9 @@ public class Peg extends Sprite {
     @Override
     public void update() {
         super.draw();
+    }
+
+    public String getShape() {
+        return shape;
     }
 }

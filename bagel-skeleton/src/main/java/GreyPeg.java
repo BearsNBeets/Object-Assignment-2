@@ -3,17 +3,22 @@ import bagel.util.Point;
 import bagel.util.Side;
 import bagel.util.Vector2;
 
+import java.util.ArrayList;
+
 public class GreyPeg extends Peg{
-    public GreyPeg(Point point) {
-        super(point, "res/grey-peg.png");
+
+    public GreyPeg(Point point, String shape) {
+        super(point, imagesFolder + "grey"  + shape + srcEnd, shape);
     }
 
 
     @Override
-    public Peg onCollision(Ball ball) {
+    public Peg onCollision(ArrayList<Ball> balls, int ballNumber) {
+        Ball ball = balls.get(ballNumber);
         calculateNewVelocity(ball);
         //Delete peg from list of pegs on board
         update();
         return this;
     }
+
 }

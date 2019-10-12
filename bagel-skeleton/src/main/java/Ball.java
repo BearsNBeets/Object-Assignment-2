@@ -13,10 +13,12 @@ public class Ball extends Sprite {
     private Vector2 velocity;
     private static final double GRAVITY = 0.15;
     private static final double SPEED = 10;
+    private String type;
 
-    public Ball(Point point, Vector2 direction) {
-        super(point, "res/ball.png");
+    public Ball(Point point, Vector2 direction, String type) {
+        super(point, imagesFolder + type + "ball.png");
         velocity = direction.mul(SPEED);
+        this.type = type;
     }
 
     public boolean outOfScreen() {
@@ -41,5 +43,9 @@ public class Ball extends Sprite {
 
     public Vector2 getVelocity() {
         return velocity;
+    }
+
+    public String getType() {
+        return type;
     }
 }
