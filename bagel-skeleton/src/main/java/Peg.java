@@ -53,14 +53,15 @@ public class Peg extends Sprite {
         Rectangle pegRectangle = this.getRect();
         Rectangle ballRectangle = ball.getRect();
         // Check for which side the ball intersected with the peg and bounce accordingly
-        if ((pegRectangle.intersectedAt(ballRectangle.bottomLeft(), velocity)).equals(Side.TOP)
+        if (pegRectangle.intersectedAt(ballRectangle.bottomLeft(), velocity).equals(Side.TOP)
                 || pegRectangle.intersectedAt(ballRectangle.bottomRight(), velocity).equals(Side.TOP)
-                || pegRectangle.intersectedAt(ballRectangle.bottomLeft(), velocity).equals(Side.BOTTOM)
-                || pegRectangle.intersectedAt(ballRectangle.bottomRight(), velocity).equals(Side.BOTTOM)
                 || pegRectangle.intersectedAt(ballRectangle.topLeft(), velocity).equals(Side.BOTTOM)
                 || pegRectangle.intersectedAt(ballRectangle.topRight(), velocity).equals(Side.BOTTOM)
+                || pegRectangle.intersectedAt(ballRectangle.bottomLeft(), velocity).equals(Side.BOTTOM)
+                || pegRectangle.intersectedAt(ballRectangle.bottomRight(), velocity).equals(Side.BOTTOM)
                 || pegRectangle.intersectedAt(ballRectangle.topLeft(), velocity).equals(Side.TOP)
-                || pegRectangle.intersectedAt(ballRectangle.topRight(), velocity).equals(Side.TOP)){
+                || pegRectangle.intersectedAt(ballRectangle.topRight(), velocity).equals(Side.TOP)
+        ){
             ball.setVelocity(new Vector2(velocity.x, -velocity.y));
         } else {
             ball.setVelocity(new Vector2(-velocity.x, velocity.y));
