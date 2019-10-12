@@ -30,6 +30,18 @@ public abstract class Sprite {
         return point;
     }
 
+    public boolean inRange(int range, Point currentLocation, Point compareToLocation){
+        double xCheck = compareToLocation.x - currentLocation.x;
+        double yCheck = compareToLocation.y - currentLocation.y;
+        if (xCheck < 0){
+            xCheck = xCheck * -1;
+        }
+        if (yCheck < 0){
+            yCheck = yCheck * -1;
+        }
+        return xCheck < range && yCheck < range;
+    }
+
     public boolean intersects(Sprite other) {
         return rect.intersects(other.rect);
     }

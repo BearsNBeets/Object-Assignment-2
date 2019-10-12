@@ -11,7 +11,7 @@ public class GreenPeg extends Peg{
     }
 
     @Override
-    public Peg onCollision(ArrayList<Ball> balls, int ballNumber) {
+    public Peg onCollision(ArrayList<Ball> balls, int ballNumber, Peg[] pegs) {
         Ball ball = balls.get(ballNumber);
         calculateNewVelocity(ball);
 
@@ -23,9 +23,9 @@ public class GreenPeg extends Peg{
 
     public void makeBalls(ArrayList<Ball> balls){
         String type = balls.get(0).getType();
-        Vector2 ballDirectionLeft = new Vector2(-1,1);
+        Vector2 ballDirectionLeft = Vector2.up.add(Vector2.left);
         balls.add(new Ball(this.getPoint(), ballDirectionLeft.normalised(), type));
-        Vector2 ballDirectionRight = new Vector2(1,1);
+        Vector2 ballDirectionRight = Vector2.up.add(Vector2.right);
         balls.add(new Ball(this.getPoint(), ballDirectionRight.normalised(), type));
     }
 

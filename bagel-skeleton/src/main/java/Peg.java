@@ -22,19 +22,37 @@ public class Peg extends Sprite {
         this.shape = shape;
     }
 
-    public Peg onCollision(ArrayList<Ball> balls, int ballNumber) {
+    public Peg onCollision(ArrayList<Ball> balls, int ballNumber, Peg[] pegs) {
         Ball ball = balls.get(ballNumber);
         calculateNewVelocity(ball);
-        //Delete peg from list of pegs on board
+        // When fireball hits, calculate other balls also hit
+        if (ball.getType().equals("fire")) {
+            splashDamage(pegs);
+        }
+        // Delete peg from list of pegs on board
         return null;
     }
 
-    //Calculate new velocity of ball depending on side of collision into peg
+    // Calculate pegs surrounding hit peg to see whether they are within damage zone 70 pixels
+    public void splashDamage(Peg[] pegs){
+        int damageRange = 70;
+        Point centralPoint = super.getRect().centre();
+        for (int i = 0; i < pegs.length; i++){
+            if (pegs[i] != null && !(pegs[i] instanceof GreyPeg)) {
+                Point pegPoint = pegs[i].getPoint();
+                if (inRange(damageRange, centralPoint, pegPoint)) {
+                    pegs[i] = null;
+                }
+            }
+        }
+    }
+
+    // Calculate new velocity of ball depending on side of collision into peg
     public void calculateNewVelocity(Ball ball){
         Vector2 velocity = ball.getVelocity();
         Rectangle pegRectangle = this.getRect();
         Rectangle ballRectangle = ball.getRect();
-        //Check for which side the ball intersected with the peg and bounce accordingly
+        // Check for which side the ball intersected with the peg and bounce accordingly
         if ((pegRectangle.intersectedAt(ballRectangle.bottomLeft(), velocity)).equals(Side.TOP)
                 || pegRectangle.intersectedAt(ballRectangle.bottomRight(), velocity).equals(Side.TOP)
                 || pegRectangle.intersectedAt(ballRectangle.bottomLeft(), velocity).equals(Side.BOTTOM)

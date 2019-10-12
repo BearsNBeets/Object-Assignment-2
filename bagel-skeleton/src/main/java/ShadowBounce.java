@@ -20,6 +20,7 @@ public class ShadowBounce extends AbstractGame {
     private Powerup powerup = null;
     private Bucket bucket = new Bucket();
     private static final Point BALL_POSITION = new Point(512, 32);
+    private static final int POWERUP_CHANCE = 10;
     private int boardNumber = 0;
     private int shotsLeft = 20;
     private int greenPegNumber = -1;
@@ -68,7 +69,7 @@ public class ShadowBounce extends AbstractGame {
             setRandomGreenPeg();
             setPowerup();
             bucket = new Bucket();
-
+            // Increase board number
             boardNumber++;
         }
     }
@@ -124,8 +125,6 @@ public class ShadowBounce extends AbstractGame {
         }
     }
 
-
-
     // RED PEGS INITIALISATION: 1/5 of blue pegs turn red
     private void setRandomRedPegs(){
         Random rand = new Random();
@@ -170,7 +169,7 @@ public class ShadowBounce extends AbstractGame {
     private void setPowerup(){
         Random rand = new Random();
         int chance = 1;
-        int randomInt = 1;//rand.nextInt(10);
+        int randomInt = rand.nextInt(POWERUP_CHANCE);
         if (randomInt == chance){
             Point randomStart = new Point(rand.nextInt(Window.getWidth()), rand.nextInt(Window.getHeight()));
             Point randomDestination = new Point(rand.nextInt(Window.getWidth()), rand.nextInt(Window.getHeight()));
@@ -197,10 +196,11 @@ public class ShadowBounce extends AbstractGame {
             for (int j = 0; j < pegs.length; j++) {
                 if (pegs[j] != null) {
                     if (ball.intersects(pegs[j])) {
-                        pegs[j] = pegs[j].onCollision(balls, i);
+                        pegs[j] = pegs[j].onCollision(balls, i, pegs);
                     }
                 }
             }
+
             if (powerup != null && ball.intersects(powerup)){
                 powerup = powerup.onCollision(balls, i);
             }

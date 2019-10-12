@@ -41,21 +41,6 @@ public class Powerup extends Sprite {
         return null;
     }
 
-    private boolean inRange(int range, Point currentLocation, Point compareToLocation){
-        double xCheck = compareToLocation.x - currentLocation.x;
-        double yCheck = compareToLocation.y - currentLocation.y;
-        if (xCheck < 0){
-            xCheck = xCheck * -1;
-        }
-        if (yCheck < 0){
-            yCheck = yCheck * -1;
-        }
-        if (xCheck < range && yCheck < range) {
-            return true;
-        }
-        return false;
-    }
-
     @Override
     public void update() {
         if (inRange(5, super.getRect().centre(), destination)){
