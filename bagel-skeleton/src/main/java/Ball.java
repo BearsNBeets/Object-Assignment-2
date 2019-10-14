@@ -21,6 +21,7 @@ public class Ball extends Sprite {
         this.type = type;
     }
 
+    // Check whether rectangle of ball is past the bottom of the screen
     public boolean outOfScreen() {
         return super.getRect().top() > Window.getHeight();
     }

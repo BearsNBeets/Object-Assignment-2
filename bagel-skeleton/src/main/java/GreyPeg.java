@@ -13,6 +13,7 @@ public class GreyPeg extends Peg{
 
 
     @Override
+    // Indestructable peg; bounce ball only
     public Peg onCollision(ArrayList<Ball> balls, int ballNumber, Peg[] pegs) {
         Ball ball = balls.get(ballNumber);
         calculateNewVelocity(ball);

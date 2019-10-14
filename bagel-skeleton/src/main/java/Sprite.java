@@ -30,6 +30,7 @@ public abstract class Sprite {
         return point;
     }
 
+    // Check distance from one point to another
     public boolean inRange(int range, Point currentLocation, Point compareToLocation){
         double xCheck = compareToLocation.x - currentLocation.x;
         double yCheck = compareToLocation.y - currentLocation.y;
@@ -42,6 +43,7 @@ public abstract class Sprite {
         return xCheck < range && yCheck < range;
     }
 
+    // Check whether rectangles intersect
     public boolean intersects(Sprite other) {
         return rect.intersects(other.rect);
     }

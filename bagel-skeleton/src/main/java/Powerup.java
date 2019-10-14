@@ -19,10 +19,12 @@ public class Powerup extends Sprite {
         calculateVelocity();
     }
 
+    // Calculate velocity of powerup
     private void calculateVelocity(){
         velocity = destination.asVector().sub(start.asVector()).mul(SPEED).normalised();
     }
 
+    // Generate random point within bounds of window
     private Point randomPoint(){
         Random rand = new Random();
         int x = rand.nextInt(Window.getWidth());
@@ -30,6 +32,7 @@ public class Powerup extends Sprite {
         return new Point(x,y);
     }
 
+    //When ball collides with powerup, change ball to fireball and add to arraylist of balls
     public Powerup onCollision(ArrayList<Ball> balls, int ballNumber) {
         Ball ball = balls.get(ballNumber);
         Point ballPoint = ball.getRect().centre();

@@ -10,17 +10,18 @@ public class GreenPeg extends Peg{
         super(point, imagesFolder + "green" + shape + srcEnd, shape);
     }
 
+    //Make new balls and destory peg when hit
     @Override
     public Peg onCollision(ArrayList<Ball> balls, int ballNumber, Peg[] pegs) {
         Ball ball = balls.get(ballNumber);
         calculateNewVelocity(ball);
-
         makeBalls(balls);
 
         //Delete peg from list of pegs on board
         return null;
     }
 
+    // Generate 2 balls going in opposite directions of same type as collided ball
     public void makeBalls(ArrayList<Ball> balls){
         String type = balls.get(0).getType();
         Vector2 ballDirectionLeft = Vector2.up.add(Vector2.left);

@@ -13,7 +13,7 @@ public class Bucket extends Sprite {
         super(defaultPoint, "res/bucket.png");
     }
 
-
+    // When bucket is hit, increase number of shots left by 1
     public int onCollision(int shotsLeft) {
         return shotsLeft + 1;
     }
@@ -21,11 +21,10 @@ public class Bucket extends Sprite {
     @Override
     public void update() {
         super.move(velocity);
-
+        // Reverse direction of bucket once it hits the edge of the window
         if (super.getRect().left() < 0 || super.getRect().right() > Window.getWidth()) {
             velocity = new Vector2(-velocity.x, velocity.y);
         }
-
         super.draw();
     }
 }

@@ -22,6 +22,7 @@ public class Peg extends Sprite {
         this.shape = shape;
     }
 
+    // Default behaviour when collision occurs to bounce ball and destory peg
     public Peg onCollision(ArrayList<Ball> balls, int ballNumber, Peg[] pegs) {
         Ball ball = balls.get(ballNumber);
         calculateNewVelocity(ball);
@@ -33,7 +34,7 @@ public class Peg extends Sprite {
         return null;
     }
 
-    // Calculate pegs surrounding hit peg to see whether they are within damage zone 70 pixels
+    // Calculate pegs surrounding hit peg by fireball to see whether they are within damage zone 70 pixels
     public void splashDamage(Peg[] pegs){
         int damageRange = 70;
         Point centralPoint = super.getRect().centre();
@@ -52,11 +53,12 @@ public class Peg extends Sprite {
         Vector2 velocity = ball.getVelocity();
         Rectangle pegRectangle = this.getRect();
         Rectangle ballRectangle = ball.getRect();
-        // Check for which side the ball intersected with the peg and bounce accordingly
+        // Check for which side the ball intersected with the peg and bounce accordingly using corners of rectangle
         if (pegRectangle.intersectedAt(ballRectangle.bottomLeft(), velocity).equals(Side.TOP)
                 || pegRectangle.intersectedAt(ballRectangle.bottomRight(), velocity).equals(Side.TOP)
                 || pegRectangle.intersectedAt(ballRectangle.topLeft(), velocity).equals(Side.BOTTOM)
                 || pegRectangle.intersectedAt(ballRectangle.topRight(), velocity).equals(Side.BOTTOM)
+                // Following checks are for when ball travels into peg to try and counter unusual bounce
                 || pegRectangle.intersectedAt(ballRectangle.bottomLeft(), velocity).equals(Side.BOTTOM)
                 || pegRectangle.intersectedAt(ballRectangle.bottomRight(), velocity).equals(Side.BOTTOM)
                 || pegRectangle.intersectedAt(ballRectangle.topLeft(), velocity).equals(Side.TOP)
