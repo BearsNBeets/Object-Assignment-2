@@ -5,15 +5,22 @@ import java.io.FileReader;
 import java.util.Arrays;
 import java.util.Random;
 
+/**
+ * The type Board.
+ */
 public class Board {
     private Peg[] pegs;
     private int boardNumber;
     private int greenPegNumber;
-    private int boardSize;
 
+    /**
+     * Instantiates a new Board.
+     *
+     * @param boardNumber the board number
+     */
     public Board(int boardNumber){
         this.boardNumber = boardNumber;
-        boardSize = boardSize();
+        int boardSize = boardSize();
         pegs = new Peg[boardSize];
         loadBoard();
         setRandomRedPegs();
@@ -91,6 +98,9 @@ public class Board {
         }
     }
 
+    /**
+     * Set random green peg in peg array.
+     */
     // GREEN PEG INITIALISATION: 1 random blue peg to green peg
     public void setRandomGreenPeg(){
         //Only when game starts the value should be -1
@@ -113,6 +123,11 @@ public class Board {
         greenPegNumber = randomInt;
     }
 
+    /**
+     * Check all red pegs boolean.
+     *
+     * @return the boolean
+     */
     //Check whether all red pegs have been destroyed
     public boolean checkAllRedPegs(){
         for (Peg peg : pegs) {
@@ -123,10 +138,18 @@ public class Board {
         return true;
     }
 
+    /**
+     * Get pegs array.
+     *
+     * @return the peg [ ]
+     */
     public Peg[] getPegs() {
         return pegs;
     }
 
+    /**
+     * Clear pegs.
+     */
     public void clearPegs(){
         Arrays.fill(pegs, null);
     }

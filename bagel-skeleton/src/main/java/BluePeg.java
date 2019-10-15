@@ -1,13 +1,16 @@
-import bagel.Image;
 import bagel.util.Point;
-import bagel.util.Rectangle;
-import bagel.util.Side;
-import bagel.util.Vector2;
 
+/**
+ * The type Blue peg.
+ */
 public class BluePeg extends Peg{
 
-
-
+    /**
+     * Instantiates a new Blue peg.
+     *
+     * @param point the point of peg
+     * @param shape the shape of peg
+     */
     public BluePeg(Point point, String shape) {
         super(point, imagesFolder + "blue" + shape + srcEnd, shape);
     }

@@ -5,13 +5,21 @@ import bagel.util.Vector2;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * The type Powerup.
+ */
 public class Powerup extends Sprite {
     private Vector2 velocity;
     private Point destination;
     private Point start;
     private static final double SPEED = 3;
 
-
+    /**
+     * Instantiates a new Powerup.
+     *
+     * @param point       the point
+     * @param destination the destination
+     */
     public Powerup(Point point, Point destination) {
         super(point, "res/powerup.png");
         this.destination = destination;
@@ -32,6 +40,13 @@ public class Powerup extends Sprite {
         return new Point(x,y);
     }
 
+    /**
+     * On collision powerup.
+     *
+     * @param balls      the balls
+     * @param ballNumber the ball number
+     * @return the powerup as removed
+     */
     //When ball collides with powerup, change ball to fireball and add to arraylist of balls
     public Powerup onCollision(ArrayList<Ball> balls, int ballNumber) {
         Ball ball = balls.get(ballNumber);

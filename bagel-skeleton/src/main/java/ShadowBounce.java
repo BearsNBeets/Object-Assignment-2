@@ -1,8 +1,7 @@
 /**
- * Sample solution for SWEN20003 Object Oriented Software Development
- * Project 1, Semester 2, 2019
+ * Adapted class from sample solution for SWEN20003 Object Oriented Software Development
+ * (Project 1, Semester 2, 2019)
  *
- * @author Eleanor McMurtry
  */
 
 import bagel.*;
@@ -11,6 +10,9 @@ import bagel.util.Point;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * The type Shadow bounce.
+ */
 public class ShadowBounce extends AbstractGame {
     private ArrayList<Ball> balls = new ArrayList<>();
     private Powerup powerup = null;
@@ -32,12 +34,9 @@ public class ShadowBounce extends AbstractGame {
         endGame();
     }
 
-    // Clear all values and show blank screen at end of game
+    // Close window at end of game
     private void endGame(){
-        board.clearPegs();
-        balls.clear();
-        powerup = null;
-        bucket = null;
+        Window.close();
     }
 
     // Prepare next board unless all boards have been played
@@ -100,17 +99,18 @@ public class ShadowBounce extends AbstractGame {
                 powerup = powerup.onCollision(balls, i);
             }
 
-            // Check for collision with bucket
-            if (ball.intersects(bucket)){
+            // Check for collision with bucket only when ball hasn't hit bucket previous frames
+            if (ball.intersects(bucket) && !ball.isBucketHit()){
                 shotsLeft = bucket.onCollision(shotsLeft);
+                ball.setBucketHit(true);
             }
         }
 
 
         // Draw all active pegs, bucket and possible powerup
-        for (int j = 0; j < pegs.length; j++){
-            if (pegs[j] != null) {
-                pegs[j].update();
+        for (Peg peg : pegs) {
+            if (peg != null) {
+                peg.update();
             }
         }
         if (powerup != null){
@@ -154,7 +154,7 @@ public class ShadowBounce extends AbstractGame {
         }
 
 
-//        // Debugging function for testing new boards using space to load next board
+        // Debugging function for testing new boards using space to load next board
 //        if (input.wasPressed(Keys.SPACE)){
 //            nextBoard();
 //        }
@@ -162,6 +162,11 @@ public class ShadowBounce extends AbstractGame {
     }
 
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         new ShadowBounce().run();
     }

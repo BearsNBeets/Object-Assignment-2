@@ -1,8 +1,7 @@
 /**
- * Sample solution for SWEN20003 Object Oriented Software Development
- * Project 1, Semester 2, 2019
+ * Adapted class from sample solution for SWEN20003 Object Oriented Software Development
+ * (Project 1, Semester 2, 2019)
  *
- * @author Eleanor McMurtry
  */
 
 import bagel.util.Point;
@@ -12,16 +11,37 @@ import bagel.util.Vector2;
 
 import java.util.ArrayList;
 
+/**
+ * The type Peg.
+ */
 public class Peg extends Sprite {
+    /**
+     * The constant end string of each peg file-name.
+     */
     public static final String srcEnd = "peg.png";
 
     private String shape;
 
+    /**
+     * Instantiates a new Peg.
+     *
+     * @param point    the point
+     * @param imageSrc the image source
+     * @param shape    the shape
+     */
     public Peg(Point point, String imageSrc, String shape) {
         super(point, imageSrc);
         this.shape = shape;
     }
 
+    /**
+     * On peg collision calculates new ball velocity and returns state of peg.
+     *
+     * @param balls      the balls
+     * @param ballNumber the ball number
+     * @param pegs       array of pegs
+     * @return the peg
+     */
     // Default behaviour when collision occurs to bounce ball and destory peg
     public Peg onCollision(ArrayList<Ball> balls, int ballNumber, Peg[] pegs) {
         Ball ball = balls.get(ballNumber);
@@ -34,6 +54,11 @@ public class Peg extends Sprite {
         return null;
     }
 
+    /**
+     * Determine pegs affected by splash damage; in range of damage from hit peg.
+     *
+     * @param pegs array of pegs
+     */
     // Calculate pegs surrounding hit peg by fireball to see whether they are within damage zone 70 pixels
     public void splashDamage(Peg[] pegs){
         int damageRange = 70;
@@ -48,6 +73,11 @@ public class Peg extends Sprite {
         }
     }
 
+    /**
+     * Calculate new velocity.
+     *
+     * @param ball the ball
+     */
     // Calculate new velocity of ball depending on side of collision into peg
     public void calculateNewVelocity(Ball ball){
         Vector2 velocity = ball.getVelocity();
@@ -75,6 +105,11 @@ public class Peg extends Sprite {
         super.draw();
     }
 
+    /**
+     * Gets shape.
+     *
+     * @return the shape
+     */
     public String getShape() {
         return shape;
     }
