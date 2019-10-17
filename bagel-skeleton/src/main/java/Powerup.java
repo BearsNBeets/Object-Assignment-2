@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * The type Powerup.
+ * The object Powerup.
  */
 public class Powerup extends Sprite {
     private Vector2 velocity;
@@ -17,7 +17,7 @@ public class Powerup extends Sprite {
     /**
      * Instantiates a new Powerup.
      *
-     * @param point       the point
+     * @param point       the location of powerup
      * @param destination the destination
      */
     public Powerup(Point point, Point destination) {
@@ -41,13 +41,12 @@ public class Powerup extends Sprite {
     }
 
     /**
-     * On collision powerup.
+     * When ball collides with powerup, change ball to fireball and add to arraylist of balls
      *
      * @param balls      the balls
      * @param ballNumber the ball number
      * @return the powerup as removed
      */
-    //When ball collides with powerup, change ball to fireball and add to arraylist of balls
     public Powerup onCollision(ArrayList<Ball> balls, int ballNumber) {
         Ball ball = balls.get(ballNumber);
         Point ballPoint = ball.getRect().centre();

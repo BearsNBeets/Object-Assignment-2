@@ -1,20 +1,17 @@
-/**
- * Adapted class from sample solution for SWEN20003 Object Oriented Software Development
- * (Project 1, Semester 2, 2019)
- *
- */
-
 import bagel.Image;
 import bagel.util.Point;
 import bagel.util.Rectangle;
 import bagel.util.Vector2;
 
 /**
- * The type Sprite.
+ * Object type of all objects that are displayed on the screen.
+ * Adapted class from sample solution for SWEN20003 Object Oriented Software Development
+ * (Project 1, Semester 2, 2019)
  */
+
 public abstract class Sprite {
     /**
-     * The constant imagesFolder.
+     * The default string for where all sprite images are stored.
      */
     public static final String imagesFolder = "res/";
     private Image image;
@@ -34,7 +31,7 @@ public abstract class Sprite {
     }
 
     /**
-     * Gets rect.
+     * Gets rect of sprite.
      *
      * @return the rect
      */
@@ -43,7 +40,7 @@ public abstract class Sprite {
     }
 
     /**
-     * Gets point.
+     * Gets point of sprite.
      *
      * @return the point
      */
@@ -52,14 +49,13 @@ public abstract class Sprite {
     }
 
     /**
-     * In range boolean.
+     * Check distance from one point to another
      *
      * @param range             the range
      * @param currentLocation   the current location
      * @param compareToLocation the compare to location
-     * @return the boolean
+     * @return boolean whether first location is within specified distance from second point
      */
-    // Check distance from one point to another
     public boolean inRange(int range, Point currentLocation, Point compareToLocation){
         double xCheck = compareToLocation.x - currentLocation.x;
         double yCheck = compareToLocation.y - currentLocation.y;
@@ -73,18 +69,17 @@ public abstract class Sprite {
     }
 
     /**
-     * Intersects boolean.
+     * Check whether rectangles intersect
      *
      * @param other the other
      * @return the boolean
      */
-    // Check whether rectangles intersect
     public boolean intersects(Sprite other) {
         return rect.intersects(other.rect);
     }
 
     /**
-     * Move.
+     * Move the object to new location
      *
      * @param dx the dx
      */
@@ -93,14 +88,14 @@ public abstract class Sprite {
     }
 
     /**
-     * Draw.
+     * Draw the object on screen
      */
     public void draw() {
         image.draw(rect.centre().x, rect.centre().y);
     }
 
     /**
-     * Update.
+     * Update the object
      */
     public abstract void update();
 }

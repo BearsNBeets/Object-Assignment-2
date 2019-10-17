@@ -1,9 +1,3 @@
-/**
- * Adapted class from sample solution for SWEN20003 Object Oriented Software Development
- * (Project 1, Semester 2, 2019)
- *
- */
-
 import bagel.util.Point;
 import bagel.util.Rectangle;
 import bagel.util.Side;
@@ -12,11 +6,13 @@ import bagel.util.Vector2;
 import java.util.ArrayList;
 
 /**
- * The type Peg.
+ * The parent type of all the pegs available in Shadow Bounce game
+ * Adapted class from sample solution for SWEN20003 Object Oriented Software Development
+ * (Project 1, Semester 2, 2019)
  */
 public class Peg extends Sprite {
     /**
-     * The constant end string of each peg file-name.
+     * The constant ending string of each peg file-name.
      */
     public static final String srcEnd = "peg.png";
 
@@ -35,39 +31,50 @@ public class Peg extends Sprite {
     }
 
     /**
-     * On peg collision calculates new ball velocity and returns state of peg.
+     * On peg collision calculates new ball velocity, destroys affected pegs and returns state of peg.
      *
      * @param balls      the balls
      * @param ballNumber the ball number
      * @param pegs       array of pegs
      * @return the peg
      */
-    // Default behaviour when collision occurs to bounce ball and destory peg
+    // Default behaviour when collision occurs to bounce ball and destroy peg
     public Peg onCollision(ArrayList<Ball> balls, int ballNumber, Peg[] pegs) {
         Ball ball = balls.get(ballNumber);
         calculateNewVelocity(ball);
         // When fireball hits, calculate other balls also hit
         if (ball.getType().equals("fire")) {
-            splashDamage(pegs);
+            splashDamage(balls, pegs);
         }
         // Delete peg from list of pegs on board
         return null;
     }
 
     /**
-     * Determine pegs affected by splash damage; in range of damage from hit peg.
+     *
+     * @param balls balls on screen
+     * @return destoryed peg as null
+     */
+    public Peg indirectCollision(ArrayList<Ball> balls){
+        return null;
+    }
+
+    /**
+     * Calculate pegs surrounding hit peg by fireball to see whether they are within damage zone 70 pixels
+     * and destroy them.
      *
      * @param pegs array of pegs
      */
-    // Calculate pegs surrounding hit peg by fireball to see whether they are within damage zone 70 pixels
-    public void splashDamage(Peg[] pegs){
+    public void splashDamage(ArrayList<Ball> balls, Peg[] pegs){
         int damageRange = 70;
         Point centralPoint = super.getRect().centre();
         for (int i = 0; i < pegs.length; i++){
+            //Skip non-existent pegs and grey pegs
             if (pegs[i] != null && !(pegs[i] instanceof GreyPeg)) {
                 Point pegPoint = pegs[i].getPoint();
+                //Check distance from hit peg
                 if (inRange(damageRange, centralPoint, pegPoint)) {
-                    pegs[i] = null;
+                    pegs[i] = pegs[i].indirectCollision(balls);
                 }
             }
         }
@@ -106,7 +113,7 @@ public class Peg extends Sprite {
     }
 
     /**
-     * Gets shape.
+     * Gets shape of peg.
      *
      * @return the shape
      */

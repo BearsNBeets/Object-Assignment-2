@@ -1,9 +1,3 @@
-/**
- * Adapted class from sample solution for SWEN20003 Object Oriented Software Development
- * (Project 1, Semester 2, 2019)
- *
- */
-
 import bagel.*;
 import bagel.util.Point;
 
@@ -11,8 +5,11 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * The type Shadow bounce.
+ * Main Shadow Bounce game class
+ * Adapted class from sample solution for SWEN20003 Object Oriented Software Development
+ * (Project 1, Semester 2, 2019)
  */
+
 public class ShadowBounce extends AbstractGame {
     private ArrayList<Ball> balls = new ArrayList<>();
     private Powerup powerup = null;
@@ -163,7 +160,7 @@ public class ShadowBounce extends AbstractGame {
 
 
     /**
-     * The entry point of application.
+     * The entry point of ShadowBounce game.
      *
      * @param args the input arguments
      */

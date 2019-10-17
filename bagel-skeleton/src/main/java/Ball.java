@@ -1,15 +1,11 @@
-/**
- * Adapted class from sample solution for SWEN20003 Object Oriented Software Development
- * (Project 1, Semester 2, 2019)
- *
- */
-
 import bagel.Window;
 import bagel.util.Point;
 import bagel.util.Vector2;
 
 /**
- * The type Ball.
+ * The object Ball which bounces around the screen and hits pegs.
+ * Adapted class from sample solution for SWEN20003 Object Oriented Software Development
+ * (Project 1, Semester 2, 2019)
  */
 public class Ball extends Sprite {
     private Vector2 velocity;
@@ -32,11 +28,10 @@ public class Ball extends Sprite {
     }
 
     /**
-     * Out of screen boolean.
+     * Check whether rectangle of ball is past the bottom of the screen
      *
      * @return the boolean
      */
-    // Check whether rectangle of ball is past the bottom of the screen
     public boolean outOfScreen() {
         return super.getRect().top() > Window.getHeight();
     }
@@ -45,11 +40,9 @@ public class Ball extends Sprite {
     public void update() {
         velocity = velocity.add(Vector2.down.mul(GRAVITY));
         super.move(velocity);
-
         if (super.getRect().left() < 0 || super.getRect().right() > Window.getWidth()) {
             velocity = new Vector2(-velocity.x, velocity.y);
         }
-
         super.draw();
     }
 
@@ -90,7 +83,7 @@ public class Ball extends Sprite {
     }
 
     /**
-     * Sets hit bucket value if ball has hit bucket on way out of screen
+     * Sets hit bucket boolean value if ball has hit bucket on way out of screen
      *
      * @param bucketHit the hit bucket
      */
